@@ -3,7 +3,8 @@ phases:
   build:
     commands:
       - docker --version
-      - arch=$( case $( uname -m ) in ( aarch64 ) echo arm64 ;; ( x86_64 ) echo amd64 ;; ( * ) exit 1 ;; esac )
-      - echo "$arch"
-      - echo "$CODEBUILD_RESOLVED_SOURCE_VERSION"
-      - docker build --tag "public.ecr.aws/v6m6o3k4/elm:$arch-$CODEBUILD_RESOLVED_SOURCE_VERSION" .
+      - case $( uname -m ) in ( aarch64 ) arch=arm64 ;; ( x86_64 ) arch=amd64 ;; ( * ) exit 1 ;; esac
+      - tag="public.ecr.aws/v6m6o3k4/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION-$arch"
+      - echo "$tag"
+      - docker build --tag "$tag" .
+      - docker push "$tag"
