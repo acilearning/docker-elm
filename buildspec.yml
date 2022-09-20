@@ -1,0 +1,8 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - docker --version
+      - arch=$( uname -m )
+      - echo "$arch"
+      - docker build --tag "public.ecr.aws/v6m6o3k4/elm:$arch" .
