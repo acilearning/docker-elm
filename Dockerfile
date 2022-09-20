@@ -1,17 +1,16 @@
 FROM ghcr.io/acilearning/docker-haskell:9.0.2
 ARG ELM_VERSION=c9aefb6230f5e0bda03205ab0499f6e4af924495
-WORKDIR /tmp
-RUN curl --location --output compiler.tar.gz "https://github.com/elm/compiler/archive/$ELM_VERSION.tar.gz"
-RUN tar --extract --file compiler.tar.gz
-WORKDIR "/tmp/compiler-$ELM_VERSION"
 RUN \
   set -o errexit -o xtrace; \
+  curl --location --output compiler.tar.gz "https://github.com/elm/compiler/archive/$ELM_VERSION.tar.gz"; \
+  tar --extract --file compiler.tar.gz; \
+  cd "/tmp/compiler-$ELM_VERSION"; \
   cabal update; \
   cabal build --only-download; \
   cabal build --only-dependencies; \
-  cabal build elm
-RUN cp --verbose "$( cabal list-bin elm )" ~/.local/bin
-RUN elm --version
+  cabal build elm; \
+  cp --verbose "$( cabal list-bin elm )" ~/.local/bin; \
+  elm --version
 
 FROM node:18.9.0
 RUN \
