@@ -4,7 +4,7 @@ RUN \
   set -o errexit -o xtrace; \
   curl --location --output compiler.tar.gz "https://github.com/elm/compiler/archive/$ELM_VERSION.tar.gz"; \
   tar --extract --file compiler.tar.gz; \
-  cd "/tmp/compiler-$ELM_VERSION"; \
+  cd "compiler-$ELM_VERSION"; \
   cabal update; \
   cabal build --only-download; \
   cabal build --only-dependencies; \
