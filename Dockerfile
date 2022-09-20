@@ -4,10 +4,12 @@ WORKDIR /tmp
 RUN curl --location --output compiler.tar.gz "https://github.com/elm/compiler/archive/$ELM_VERSION.tar.gz"
 RUN tar --extract --file compiler.tar.gz
 WORKDIR "/tmp/compiler-$ELM_VERSION"
-RUN cabal update
-RUN cabal build --only-download
-RUN cabal build --only-dependencies
-RUN cabal build elm
+RUN \
+  set -o errexit -o xtrace; \
+  cabal update; \
+  cabal build --only-download; \
+  cabal build --only-dependencies; \
+  cabal build elm
 RUN cp --verbose "$( cabal list-bin elm )" ~/.local/bin
 RUN elm --version
 
