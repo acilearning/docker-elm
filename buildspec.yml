@@ -3,9 +3,10 @@ phases:
   build:
     commands:
       - docker --version
-      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v6m6o3k4
+      - server=public.ecr.aws/v6m6o3k4
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin "$server"
       - case $( uname -m ) in ( aarch64 ) arch=arm64 ;; ( x86_64 ) arch=amd64 ;; ( * ) exit 1 ;; esac
-      - tag="public.ecr.aws/v6m6o3k4/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION-$arch"
+      - tag="$server/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION-$arch"
       - echo "$tag"
       - docker build --tag "$tag" .
       - docker push "$tag"
