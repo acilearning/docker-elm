@@ -10,3 +10,14 @@ phases:
       - echo "$tag"
       - docker build --tag "$tag" .
       - docker push "$tag"
+
+# After both amd64 (x86_64) and arm64 (aarch64) builds finish, run these commands:
+#
+# > docker manifest create \
+# >  "$server/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION" \
+# >  "$server/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION-amd64" \
+# >  "$server/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION-arm64"
+#
+# > docker manifest push "$server/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION"
+#
+# That will create a single manifest that contains both architectures.
