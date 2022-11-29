@@ -5,6 +5,7 @@ env:
     DOCKER_USERNAME: docker-hub-read-only:DOCKER_USERNAME
   variables:
     AWS_REGION: us-east-1
+    ELM_VERSION: 0.19.1
 phases:
   build:
     commands:
@@ -19,7 +20,7 @@ phases:
 
       - echo "$arch"
 
-      - tag="$server/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION-$arch"
+      - tag="$server/elm:$ELM_VERSION-$CODEBUILD_RESOLVED_SOURCE_VERSION-$arch"
 
       - echo "$tag"
 

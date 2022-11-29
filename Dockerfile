@@ -1,8 +1,8 @@
-FROM public.ecr.aws/acilearning/haskell:9.0.2-08f0de6f7cf16cb1707e97ce43370b0649faf1fd
+FROM public.ecr.aws/acilearning/haskell:9.0.2-9b15804b439f995c128b659e9d5b11e98f6c6b97
 
 # This commit is compatible with Elm version 0.19.1.
 # https://github.com/elm/compiler/compare/0.19.1...master
-ARG ELM_VERSION=c9aefb6230f5e0bda03205ab0499f6e4af924495
+ARG ELM_VERSION=047d5026fe6547c842db65f7196fed3f0b4743ee
 
 # This comes from a fork of elm-format that adds support for Linux on ARM64.
 # https://github.com/avh4/elm-format/pull/777
@@ -29,7 +29,7 @@ RUN \
   cp --verbose _build/elm-format ~/.local/bin; \
   elm-format --help
 
-FROM node:18.10.0
+FROM node:18.12.1
 RUN \
   set -o errexit -o xtrace; \
   apt-get update; \
