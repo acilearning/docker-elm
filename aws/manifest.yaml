@@ -2,6 +2,7 @@ version: 0.2
 env:
   variables:
     AWS_REGION: us-east-1
+    ELM_VERSION: 0.19.1
 phases:
   build:
     commands:
@@ -10,7 +11,7 @@ phases:
 
       - aws ecr-public get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$server"
 
-      - tag="$server/elm:$CODEBUILD_RESOLVED_SOURCE_VERSION"
+      - tag="$server/elm:$ELM_VERSION-$CODEBUILD_RESOLVED_SOURCE_VERSION"
 
       - echo "$tag"
 
