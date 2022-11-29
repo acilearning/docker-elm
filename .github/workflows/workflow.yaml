@@ -36,3 +36,4 @@ jobs:
         with:
           project-name: docker-elm-amd64
           buildspec-override: aws/manifest.yaml
+          env-vars-for-codebuild: LATEST
