@@ -1,4 +1,4 @@
-FROM public.ecr.aws/acilearning/haskell:9.0.2-08f0de6f7cf16cb1707e97ce43370b0649faf1fd
+FROM public.ecr.aws/acilearning/haskell:9.0.2-9b15804b439f995c128b659e9d5b11e98f6c6b97
 
 # This commit is compatible with Elm version 0.19.1.
 # https://github.com/elm/compiler/compare/0.19.1...master
