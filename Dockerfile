@@ -29,7 +29,7 @@ RUN \
   cp --verbose _build/elm-format ~/.local/bin; \
   elm-format --help
 
-FROM node:18.10.0
+FROM node:18.12.1
 RUN \
   set -o errexit -o xtrace; \
   apt-get update; \
