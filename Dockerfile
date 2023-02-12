@@ -23,7 +23,7 @@ RUN \
   git clone https://github.com/avh4/elm-format; \
   cd elm-format; \
   git checkout "$ELM_FORMAT_VERSION"; \
-  ./build.sh -- build; \
+  dev/build.sh -- build; \
   cp --verbose _build/elm-format ~/.local/bin; \
   elm-format --help
 
