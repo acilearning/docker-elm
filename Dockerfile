@@ -4,9 +4,7 @@ FROM public.ecr.aws/acilearning/haskell:9.0.2-9b15804b439f995c128b659e9d5b11e98f
 # https://github.com/elm/compiler/compare/0.19.1...master
 ARG ELM_VERSION=047d5026fe6547c842db65f7196fed3f0b4743ee
 
-# This comes from a fork of elm-format that adds support for Linux on ARM64.
-# https://github.com/avh4/elm-format/pull/777
-ARG ELM_FORMAT_VERSION=535866ba69b97eb1e5755191753baafa3a21ef5d
+ARG ELM_FORMAT_VERSION=c6c019942bc32961fba0ff196749d8089d2af6d9
 
 RUN \
   set -o errexit -o xtrace; \
@@ -22,7 +20,7 @@ RUN \
   cp --verbose "$( cabal list-bin elm )" ~/.local/bin; \
   elm --version; \
   cd ..; \
-  git clone https://github.com/tfausak/elm-format; \
+  git clone https://github.com/avh4/elm-format; \
   cd elm-format; \
   git checkout "$ELM_FORMAT_VERSION"; \
   ./build.sh -- build; \
