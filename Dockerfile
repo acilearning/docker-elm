@@ -29,13 +29,7 @@ RUN \
   cp --verbose _build/elm-format ~/.local/bin; \
   elm-format --help
 
-FROM node:18.12.1
-RUN \
-  set -o errexit -o xtrace; \
-  apt-get update; \
-  env DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes \
-    ca-certificates \
-    libnuma1
+FROM mcr.microsoft.com/devcontainers/javascript-node:18
 USER node
 COPY --from=0 /home/haskell/.local/bin/elm /usr/local/bin
 COPY --from=0 /home/haskell/.local/bin/elm-format /usr/local/bin
@@ -44,4 +38,3 @@ RUN \
   mkdir --parents --verbose ~/.cache ~/.elm ~/.npm; \
   elm --version; \
   elm-format --help
-VOLUME /home/node/.cache /home/node/.elm /home/node/.npm
